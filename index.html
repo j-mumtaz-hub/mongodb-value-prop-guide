@@ -1,19 +1,1230 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Code:wght@300..700&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Oxanium:wght@200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <script type="module" crossorigin src="./assets/index-Djefq0_v.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Cm2Vfsp8.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MongoDB Value Proposition Intelligence</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #00131A;
+  color: #E8F4F0;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+.app { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* ── Header ── */
+header {
+  background: #082231;
+  border-bottom: 1px solid #0D3347;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo-mark {
+  width: 28px; height: 28px;
+  background: #00ED64;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-mark svg { width: 16px; height: 16px; }
+.header-title { font-size: 1rem; font-weight: 700; color: #fff; }
+.header-sub { font-size: 0.75rem; color: #7AACBD; margin-left: auto; letter-spacing: 0.04em; }
+
+/* ── Layout ── */
+.main { display: flex; flex: 1; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 210px;
+  background: #082231;
+  border-right: 1px solid #0D3347;
+  padding: 16px 0 32px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+.sidebar-section { margin-bottom: 6px; }
+.sidebar-section-label {
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7AACBD;
+  padding: 10px 16px 4px;
+}
+.sidebar-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: #B8D8E8;
+  font-size: 0.82rem;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  border-left: 3px solid transparent;
+}
+.sidebar-btn:hover { background: rgba(0,237,100,0.06); color: #fff; }
+.sidebar-btn.active {
+  background: rgba(0,237,100,0.10);
+  color: #00ED64;
+  border-left-color: #00ED64;
+  font-weight: 600;
+}
+
+/* ── Content ── */
+.content { flex: 1; padding: 28px 32px; max-width: 1080px; }
+
+/* ── Section headings ── */
+.section-heading { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.section-sub { font-size: 0.82rem; color: #7AACBD; margin-bottom: 22px; }
+
+/* ── Cards ── */
+.card {
+  background: #082231;
+  border: 1px solid #0D3347;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.card-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.card-tagline { font-size: 0.78rem; color: #00ED64; font-weight: 600; margin-bottom: 12px; }
+
+/* ── Grid layouts ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+@media (max-width: 900px) { .product-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .product-grid { grid-template-columns: 1fr; } }
+
+/* ── Product mini cards ── */
+.product-mini {
+  background: #0A1E2B;
+  border: 1px solid #0D3347;
+  border-radius: 8px;
+  padding: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.product-mini:hover {
+  border-color: #00ED64;
+  background: rgba(0,237,100,0.05);
+}
+.product-mini-name { font-size: 0.85rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.product-mini-tag { font-size: 0.7rem; color: #00ED64; }
+
+.detail-panel {
+  background: #082231;
+  border: 1px solid #0D3347;
+  border-radius: 10px;
+  padding: 24px;
+}
+
+/* ── Typography ── */
+.label {
+  font-size: 0.67rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #7AACBD;
+  margin-bottom: 6px;
+}
+.value-text { font-size: 0.875rem; color: #D0E8F0; margin-bottom: 14px; line-height: 1.65; }
+
+.fact-list { list-style: none; padding: 0; margin-bottom: 14px; }
+.fact-list li {
+  font-size: 0.82rem;
+  color: #B8D8E8;
+  padding: 5px 0 5px 18px;
+  position: relative;
+  border-bottom: 1px solid rgba(13,51,71,0.6);
+}
+.fact-list li::before { content: "→"; position: absolute; left: 0; color: #00ED64; }
+.fact-list li:last-child { border-bottom: none; }
+
+/* ── Badges ── */
+.badge {
+  display: inline-block;
+  font-size: 0.63rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+.badge-SELECT  { background: rgba(0,237,100,0.15);  color: #00ED64;  border: 1px solid rgba(0,237,100,0.3); }
+.badge-REPLACE { background: rgba(255,82,82,0.12);  color: #FF6B6B;  border: 1px solid rgba(255,82,82,0.25); }
+.badge-LAUNCH  { background: rgba(255,153,0,0.12);  color: #FF9900;  border: 1px solid rgba(255,153,0,0.25); }
+.badge-MIGRATE { background: rgba(100,160,255,0.12); color: #7EB8FF; border: 1px solid rgba(100,160,255,0.25); }
+
+/* ── Play toggles ── */
+.play-toggles { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.play-toggle-btn {
+  background: #0D3347;
+  border: 1px solid #1A4A63;
+  color: #7AACBD;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.play-toggle-btn:hover { border-color: #7AACBD; color: #E8F4F0; }
+.play-toggle-btn.active { background: rgba(0,237,100,0.10); border-color: #00ED64; color: #00ED64; }
+.play-toggle-btn.active-replace { background: rgba(255,82,82,0.08); border-color: #FF6B6B; color: #FF6B6B; }
+.play-toggle-btn.active-launch  { background: rgba(255,153,0,0.08); border-color: #FF9900; color: #FF9900; }
+.play-toggle-btn.active-migrate { background: rgba(100,160,255,0.08); border-color: #7EB8FF; color: #7EB8FF; }
+
+/* ── Play card ── */
+.play-card { background: #0A1E2B; border: 1px solid #0D3347; border-radius: 10px; padding: 20px; }
+.play-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.play-title { font-size: 1rem; font-weight: 700; color: #fff; }
+.play-industry { font-size: 0.75rem; color: #7AACBD; margin-bottom: 14px; }
+.play-section { margin-bottom: 12px; }
+.play-section-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #00ED64;
+  margin-bottom: 4px;
+}
+.play-section-text { font-size: 0.85rem; color: #D0E8F0; line-height: 1.6; }
+
+/* ── Product chips ── */
+.chip-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+.chip {
+  background: #0D3347;
+  border: 1px solid #1A4A63;
+  color: #7AACBD;
+  font-size: 0.71rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* ── One-liner ── */
+.one-liner {
+  background: rgba(0,237,100,0.07);
+  border: 1px solid rgba(0,237,100,0.2);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #E8F4F0;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+/* ── Care-about pills ── */
+.pill {
+  display: inline-block;
+  background: #0D3347;
+  border: 1px solid #1A4A63;
+  color: #B8D8E8;
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin: 3px;
+}
+
+/* ── Objections ── */
+.objection { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid #0D3347; }
+.objection:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.objection-q { font-size: 0.83rem; font-weight: 600; color: #FFD580; margin-bottom: 6px; }
+.objection-a { font-size: 0.83rem; color: #D0E8F0; line-height: 1.6; }
+
+/* ── Divider ── */
+.divider { border: none; border-top: 1px solid #0D3347; margin: 16px 0; }
+
+/* ── Back button ── */
+.back-btn {
+  background: none; border: none; color: #7AACBD;
+  font-size: 0.82rem; cursor: pointer;
+  padding: 0 0 16px;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: color 0.15s;
+}
+.back-btn:hover { color: #00ED64; }
+
+/* ── Category label ── */
+.category-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7AACBD;
+  margin-bottom: 6px;
+}
+
+.hidden { display: none !important; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #00131A; }
+::-webkit-scrollbar-thumb { background: #0D3347; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #1A4A63; }
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <div class="logo-mark">
+    <svg viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 0C8 0 2 6 2 12C2 15.314 4.686 18 8 18C11.314 18 14 15.314 14 12C14 6 8 0 8 0Z" fill="#00131A"/>
+      <line x1="8" y1="1" x2="8" y2="17" stroke="#00131A" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <span class="header-title">MongoDB Value Proposition Intelligence</span>
+  <span class="header-sub">SI Partner &nbsp;·&nbsp; Cloud Partner &nbsp;·&nbsp; Customer</span>
+</header>
+
+<div class="main">
+
+<nav class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Overview</div>
+    <button class="sidebar-btn active" onclick="navigate('products')" id="nav-products">Products</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">SI Partners</div>
+    <button class="sidebar-btn" onclick="navigate('si-practice-lead')"   id="nav-si-practice-lead">Practice Lead / MD</button>
+    <button class="sidebar-btn" onclick="navigate('si-client-partner')"  id="nav-si-client-partner">Client Partner / AE</button>
+    <button class="sidebar-btn" onclick="navigate('si-sa')"              id="nav-si-sa">Solutions Architect</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Cloud Partners</div>
+    <button class="sidebar-btn" onclick="navigate('cloud-am')"       id="nav-cloud-am">Ent. Account Manager</button>
+    <button class="sidebar-btn" onclick="navigate('cloud-psa')"      id="nav-cloud-psa">Partner Solutions Arch.</button>
+    <button class="sidebar-btn" onclick="navigate('cloud-alliance')" id="nav-cloud-alliance">Partner / Alliance Mgr</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Customer</div>
+    <button class="sidebar-btn" onclick="navigate('cust-cto')" id="nav-cust-cto">CTO / VP Engineering</button>
+    <button class="sidebar-btn" onclick="navigate('cust-cdo')" id="nav-cust-cdo">CDO / CDAO</button>
+    <button class="sidebar-btn" onclick="navigate('cust-cio')" id="nav-cust-cio">CIO / VP Infrastructure</button>
+  </div>
+</nav>
+
+<div class="content">
+
+  <!-- PRODUCTS VIEW -->
+  <div id="view-products">
+    <div class="section-heading">MongoDB Product Suite</div>
+    <div class="section-sub">Select any product for positioning, key facts, and audience relevance.</div>
+    <div class="product-grid" id="product-grid"></div>
+    <div id="product-detail" class="hidden">
+      <button class="back-btn" onclick="closeProductDetail()">← All Products</button>
+      <div id="product-detail-inner"></div>
+    </div>
+  </div>
+
+  <!-- PERSONA VIEW -->
+  <div id="view-persona" class="hidden">
+    <div id="persona-inner"></div>
+  </div>
+
+</div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /app -->
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// PRODUCTS
+// ═══════════════════════════════════════════════════════════
+const PRODUCTS = [
+  {
+    id: "atlas",
+    name: "MongoDB Atlas",
+    tagline: "Developer Data Platform",
+    what: "Fully managed, multi-cloud database service. Handles provisioning, patching, backups, failover, and scaling automatically across AWS, Azure, and GCP.",
+    soWhat: "Developers ship faster, ops teams eliminate database management overhead, and enterprises avoid cloud lock-in with true multi-cloud portability.",
+    keyFacts: [
+      "71%+ of MongoDB FY2025 revenue — the primary growth engine",
+      "Consumption-based pricing: customers pay for what they use",
+      "Scales compute and storage independently — no over-provisioning",
+      "50%+ of Fortune 100 run MongoDB for mission-critical workloads",
+      "Same API and tooling across AWS, Azure, and GCP"
+    ]
+  },
+  {
+    id: "vector",
+    name: "Atlas Vector Search",
+    tagline: "AI & RAG without a separate vector store",
+    what: "Native vector search embedded directly in Atlas. Stores and indexes high-dimensional embeddings (up to 8,192 dimensions) alongside operational data for semantic search, RAG pipelines, and recommendations.",
+    soWhat: "AI applications run on existing operational data without a separate vector database. One platform, one bill, one security model.",
+    keyFacts: [
+      "8,192 dimensions — vs. DocumentDB's hard cap of 2,000",
+      "HNSW indexing for approximate nearest neighbor at scale",
+      "Native integrations with AWS Bedrock, Azure OpenAI, Google Vertex AI",
+      "Includes Voyage AI (MongoDB-acquired) for embeddings"
+    ]
+  },
+  {
+    id: "stream",
+    name: "Atlas Stream Processing",
+    tagline: "Real-time data pipelines, native to Atlas",
+    what: "Serverless stream processing built into Atlas. Ingests from Kafka, event buses, IoT, and application events. Transforms and routes data in real time using MQL — no new language to learn.",
+    soWhat: "Eliminates a separate streaming infrastructure layer. Real-time personalization, fraud detection, and operational analytics on one platform.",
+    keyFacts: [
+      "MQL-based — no new query language required",
+      "Natively integrated with Atlas — no ETL pipeline to maintain",
+      "Reduces architectural complexity: OLTP + streaming on one platform"
+    ]
+  },
+  {
+    id: "search",
+    name: "Atlas Search",
+    tagline: "Lucene-powered full-text search — no Elasticsearch needed",
+    what: "Full-text search built on Apache Lucene, embedded in Atlas. Relevance ranking, fuzzy matching, autocomplete, and faceted filtering without a separate search cluster.",
+    soWhat: "Replaces Elasticsearch for most enterprise search use cases, eliminating data duplication and sync complexity.",
+    keyFacts: [
+      "Eliminates Elasticsearch/OpenSearch for most search use cases",
+      "Autocomplete, fuzzy match, and relevance tuning out of the box",
+      "Search index scales independently from the operational database"
+    ]
+  },
+  {
+    id: "encryption",
+    name: "Queryable Encryption",
+    tagline: "Query encrypted data — without decrypting it",
+    what: "Industry-first capability: query PII, PHI, and financial data that remains encrypted at the database level — even from the DBA. No plaintext exposure, ever.",
+    soWhat: "The strongest technical differentiator in regulated industries. FINRA, HIPAA, and PCI-DSS compliance becomes dramatically simpler. No competitor has this.",
+    keyFacts: [
+      "No competitor offers queryable encryption at production scale",
+      "Data stays encrypted during queries — not only at rest",
+      "Patent-protected — absent from DocumentDB, Cosmos DB, and DynamoDB",
+      "Satisfies the toughest data residency and privacy mandates"
+    ]
+  },
+  {
+    id: "relational",
+    name: "Relational Migrator",
+    tagline: "Accelerate Oracle / SQL Server workload migration to Atlas",
+    what: "Automated tool that converts relational schemas (Oracle, SQL Server, PostgreSQL, MySQL) to the MongoDB document model. Maps joins to embedded documents, generates application code, and handles data migration.",
+    soWhat: "Turns a 12-month migration project into a 6-week proof of concept. The primary tool for every REPLACE and MIGRATE play.",
+    keyFacts: [
+      "Auto-converts relational schemas and stored procedures to MongoDB",
+      "Generates code scaffolding for .NET, Java, Node.js, and Python",
+      "Key differentiator vs. Oracle Autonomous DB and AWS DMS"
+    ]
+  },
+  {
+    id: "appservices",
+    name: "App Services / Device Sync",
+    tagline: "Backend-as-a-service with edge and mobile sync",
+    what: "Serverless backend services — Functions, Triggers, GraphQL, Data API, and Device Sync for mobile and edge workloads. Real-time bidirectional sync between Atlas and edge devices, even offline.",
+    soWhat: "Eliminates custom backend scaffolding for partners and reduces time-to-production for mobile and edge applications.",
+    keyFacts: [
+      "Atlas Triggers automate workflows on data changes — no polling",
+      "Data API: expose Atlas collections as a REST endpoint instantly",
+      "GraphQL layer reduces custom API development time significantly"
+    ]
+  },
+  {
+    id: "charts",
+    name: "Atlas Charts",
+    tagline: "Native data visualization inside Atlas",
+    what: "Embedded BI and data visualization built directly into Atlas. Dashboards on live operational data — no ETL, no separate BI tool required.",
+    soWhat: "Eliminates the pipeline from operational database to BI tool for dashboarding use cases. Immediate value for partners and customers building reporting on Atlas.",
+    keyFacts: [
+      "Zero data movement — dashboards run on live operational data",
+      "Embed dashboards directly into customer-facing applications",
+      "No Tableau or Power BI license required for operational reporting"
+    ]
+  },
+  {
+    id: "amp",
+    name: "Cloud Migration Acceleration + Atlas",
+    tagline: "Cut 18-month migrations to 6–9 months — on any cloud",
+    what: "Each major cloud has a migration acceleration program that pairs with MongoDB Relational Migrator: AWS AMP, Azure Migrate + SMART, and GCP CAMP. The cloud program handles application and infrastructure; Relational Migrator handles the data layer in parallel.",
+    soWhat: "Compresses migration timelines by 50–65% on any cloud. The customer lands on an AI-ready Atlas data layer instead of a cloud-hosted version of the same legacy database.",
+    keyFacts: [
+      "AWS: AMP — COBOL/Oracle modernization to AWS + Atlas",
+      "Azure: SMART — legacy application modernization to Azure + Atlas",
+      "GCP: CAMP — mainframe/Oracle to GCP + Atlas",
+      "Atlas on Marketplace burns cloud committed spend (EDP / MACC / CUD)"
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════════
+// PERSONAS
+// ═══════════════════════════════════════════════════════════
+const PERSONAS = [
+
+  // ─── SI: Practice Lead / MD ───────────────────────────────────────────
+  {
+    id: "si-practice-lead",
+    category: "si",
+    title: "Practice Lead / Managing Director",
+    company: "System Integrator",
+    careAbout: [
+      "Growing and protecting high-margin practice revenue",
+      "Advancing cloud and data partnership tiers",
+      "Differentiating the practice from hyperscaler-led delivery",
+      "Building repeatable, scalable delivery methodologies",
+      "Winning logos that expand into multi-year engagements"
+    ],
+    businessProblem: "Practice revenue from traditional implementation work is under margin pressure as cloud migrations become commoditized. The Practice Lead needs a differentiated data modernization play that generates premium billable hours, protects the practice from hyperscaler displacement, and builds a sustainable center of excellence.",
+    valueProp: "MongoDB partnership creates a high-margin practice layer that hyperscalers cannot displace. Every workload migrated to Atlas requires significantly more SI services than a lift-and-shift. The Atlas Center of Excellence model generates recurring architectural advisory, delivery, and managed services work — while MongoDB co-sell and partner tier programs provide joint pipeline and recognition.",
+    oneLiner: "MongoDB turns a commoditized migration practice into a recurring AI data platform advisory — generating premium hours, co-sell pipeline, and partner recognition that hyperscalers can't compete with.",
+    relevantProducts: ["atlas","relational","vector","appservices","amp"],
+    objections: [
+      { q: "We already have strong hyperscaler partnerships — why add MongoDB?", a: "MongoDB is additive to your hyperscaler practice, not competitive with it. Atlas runs on AWS, Azure, and GCP. Every Atlas workload increases cloud consumption, supporting your hyperscaler tiers. MongoDB co-sell pairs with your cloud go-to-market — it doesn't replace it." },
+      { q: "Our clients can use the cloud's native MongoDB-compatible database.", a: "Cloud-native MongoDB-compatible services cap out at 2,000 vector search dimensions versus Atlas's 8,192, lack Queryable Encryption, and can't run multi-cloud. For AI or regulated workloads, they create a ceiling your practice will eventually have to work around — usually at the worst possible moment in an engagement." },
+      { q: "Our clients are asking about GenAI — MongoDB isn't an AI company.", a: "Atlas is the operational data layer that every production GenAI application needs. Vector Search, native cloud AI service integrations, and Voyage AI embeddings make Atlas the data infrastructure for AI apps — not just a database. Several leading SI AI CoEs have standardized on this architecture." }
+    ],
+    plays: [
+      {
+        badge: "SELECT",
+        label: "AI Center of Excellence Anchor",
+        industry: "Any vertical with active AI investment",
+        situation: "An enterprise client is building a GenAI product practice and the SI is the delivery vehicle. The client's AI CoE needs a standard data platform recommendation for all net-new AI application builds — and the decision will ripple across the entire SI's client portfolio.",
+        mongoAngle: "Position Atlas + Vector Search as the standard AI data layer the SI's CoE recommends for every net-new AI application build. A CoE-level adoption means every product the CoE touches runs on Atlas — without a separate sales motion per engagement.",
+        expectedOutcome: "Atlas is written into the SI's AI CoE reference architecture. The practice captures recurring AI advisory and build hours across the client portfolio with no per-deal re-sell required.",
+        products: ["atlas","vector","appservices","stream"]
+      },
+      {
+        badge: "REPLACE",
+        label: "Legacy Database Modernization Practice",
+        industry: "Any — legacy relational database estate",
+        situation: "The practice is delivering modernization engagements where clients are moving off legacy relational databases. The default proposal is a lift-and-shift to a cloud-managed relational service — a commoditized, low-margin engagement.",
+        mongoAngle: "Relational Migrator converts legacy relational schemas to Atlas automatically, but the document model transformation requires SI architectural expertise — 3–5x the billable hours of a lift-and-shift. Adopting Relational Migrator as the practice's standard migration tooling upgrades every modernization engagement from commodity to premium.",
+        expectedOutcome: "The practice wins modernization engagements at higher margins. MongoDB becomes the target state for document-model workloads. The practice builds a replicable migration methodology that differentiates it from hyperscaler-led proposals.",
+        products: ["relational","atlas","amp"]
+      },
+      {
+        badge: "LAUNCH",
+        label: "MongoDB Center of Excellence Build-Out",
+        industry: "Any — SI firm investing in data modernization",
+        situation: "The practice lead is investing in a new capability area to differentiate from competitors. The market opportunity is enterprise data modernization and AI-ready data infrastructure — but the practice currently lacks a differentiated point of view.",
+        mongoAngle: "MongoDB's partner program provides the enablement, co-sell motion, and certification path to build a CoE rapidly. Partner tier advancement, joint marketing funds, and MongoDB field SE embedding during the first engagements accelerate time-to-credibility. The practice lead gets a defined path from zero to partner-of-year recognition.",
+        expectedOutcome: "SI practice achieves a named MongoDB partnership tier within 12 months. The CoE becomes a source of inbound client conversations around AI data infrastructure and modernization.",
+        products: ["atlas","vector","relational","appservices"]
+      },
+      {
+        badge: "MIGRATE",
+        label: "Cloud Migration Program + Atlas Data Layer",
+        industry: "Enterprise — any vertical with on-prem database estate",
+        situation: "The SI is delivering a large-scale cloud migration program. The application and infrastructure layers are covered, but the database strategy defaults to a cloud-hosted equivalent of the existing legacy system — leaving technical debt intact and blocking AI readiness.",
+        mongoAngle: "Pair the cloud migration program with Atlas as the target data layer. Relational Migrator handles schema conversion in parallel with the infrastructure migration. Cloud migration acceleration programs (AMP/SMART/CAMP) and Relational Migrator working in tandem compress the full migration timeline by 50–65% and land the client on an AI-ready platform instead of a cloud-hosted legacy system.",
+        expectedOutcome: "The SI wins the data layer component of the migration program. Migration timelines compress significantly. The client lands on Atlas instead of a legacy cloud-hosted database — creating a platform for future AI engagement.",
+        products: ["relational","atlas","amp","vector"]
+      }
+    ]
+  },
+
+  // ─── SI: Client Partner / AE ──────────────────────────────────────────
+  {
+    id: "si-client-partner",
+    category: "si",
+    title: "Client Partner / Account Executive",
+    company: "System Integrator",
+    careAbout: [
+      "Growing managed services revenue within named accounts",
+      "Protecting relationships from hyperscaler disintermediation",
+      "Delivering on modernization commitments without scope creep",
+      "Adding AI-ready capabilities to justify premium engagement pricing",
+      "Creating expansion opportunities within existing accounts"
+    ],
+    businessProblem: "The client partner owns a major account relationship and needs to grow revenue without losing ground to cloud providers who are increasingly engaging directly with the client's technical leadership. The risk is commoditization — the SI becomes a delivery body rather than a trusted advisor.",
+    valueProp: "MongoDB creates a premium advisory layer that cloud providers cannot deliver. Atlas implementation, AI application builds, and ongoing data modernization advisory are SI-delivered services that hyperscalers don't offer. The MongoDB co-sell motion creates net-new pipeline inside accounts the SI already owns — without competing with the cloud relationship.",
+    oneLiner: "MongoDB gives the client partner a premium data platform advisory that cloud providers can't eat — and a co-sell motion that generates net-new revenue inside accounts you already own.",
+    relevantProducts: ["atlas","vector","relational","amp","appservices"],
+    objections: [
+      { q: "The client's CTO wants to go direct with the cloud for database services.", a: "Cloud-managed databases and Atlas are different products. Atlas adds multi-cloud portability, Queryable Encryption, Vector Search at enterprise AI dimensions, and automated schema migration tooling that no cloud provider offers natively. The SI adds value by architecting and managing the Atlas layer — not by replicating what the cloud already does." },
+      { q: "We don't have certified MongoDB staff — this will slow us down.", a: "MongoDB's partner certification path is accelerated for SI teams on active engagements. MongoDB field SEs embed during the first project. Certification builds practice equity — it's not a bottleneck, it's a competitive moat once achieved." },
+      { q: "The client has an existing database contract they can't exit immediately.", a: "Atlas doesn't require immediate contract exit. Relational Migrator supports phased workload-by-workload migration. Start with net-new AI applications on Atlas — prove value, build momentum — and the migration follows the roadmap the SI controls." }
+    ],
+    plays: [
+      {
+        badge: "SELECT",
+        label: "Net-New AI Application Build",
+        industry: "Any vertical with active AI product investment",
+        situation: "The client is building a net-new AI-powered product — a recommendation engine, semantic search, enterprise co-pilot, or knowledge base — and the SI has the delivery relationship. The data layer decision hasn't been locked yet.",
+        mongoAngle: "Atlas + Vector Search is the fastest path to a production AI application. Native integrations with all major cloud AI services eliminate a separate vector database. The SI captures the build hours; MongoDB captures the platform consumption. Position before the default falls to a siloed cloud-native option.",
+        expectedOutcome: "Atlas is selected as the AI data layer. The SI captures 6–18 months of build and advisory revenue on a high-visibility strategic engagement.",
+        products: ["atlas","vector","appservices","stream"]
+      },
+      {
+        badge: "REPLACE",
+        label: "Modernization vs. Lift-and-Shift",
+        industry: "Any — legacy database renewal cycle",
+        situation: "The client has a legacy database contract renewal approaching. The path of least resistance is a lift-and-shift to a cloud-managed equivalent. The SI has an opportunity to propose strategic modernization instead — but needs a differentiated alternative.",
+        mongoAngle: "A lift-and-shift is commoditized. A migration to Atlas using Relational Migrator is a strategic transformation — significantly higher services hours, a defensible advisory engagement, and an outcome the client can articulate to their board as modernization rather than maintenance.",
+        expectedOutcome: "The SI wins the engagement over a lift-and-shift proposal. Atlas becomes the target state. The client relationship upgrades from delivery vendor to strategic advisor.",
+        products: ["relational","atlas","amp"]
+      },
+      {
+        badge: "LAUNCH",
+        label: "Managed Data Platform Contract",
+        industry: "Enterprise — any vertical",
+        situation: "The client has a fragmented data estate managed by multiple vendors with no unified platform contract. The SI has a long-standing relationship and an opportunity to restructure the engagement around a managed platform advisory.",
+        mongoAngle: "Atlas is the consolidation target. Stream Processing, Search, Charts, and Vector Search reduce or eliminate the need for separate streaming, search, BI, and vector tools. The SI manages one platform under a multi-year contract — more defensible than discrete project work.",
+        expectedOutcome: "Multi-year managed data platform contract. SI captures recurring advisory and management revenue. Client reduces vendor sprawl and gains a unified platform.",
+        products: ["atlas","stream","search","charts","vector"]
+      },
+      {
+        badge: "MIGRATE",
+        label: "Phased Database Migration Program",
+        industry: "Enterprise — any vertical with legacy relational estate",
+        situation: "The client has committed to a multi-year database modernization roadmap. Multiple workloads across multiple business units need to move off legacy systems. The SI is the program delivery vehicle and needs a scalable, repeatable migration methodology.",
+        mongoAngle: "Relational Migrator enables workload-by-workload migration with automated schema conversion and code generation. Each workload migration follows the same methodology — reducing delivery risk, increasing velocity, and creating a replicable program the SI can scale across business units without re-inventing the approach each time.",
+        expectedOutcome: "SI delivers a multi-year migration program with a scalable methodology. Each workload migrated expands the Atlas footprint and generates additional SI delivery hours. The program becomes a reference engagement for new client conversations.",
+        products: ["relational","atlas","amp","vector"]
+      }
+    ]
+  },
+
+  // ─── SI: Solutions Architect ──────────────────────────────────────────
+  {
+    id: "si-sa",
+    category: "si",
+    title: "Solutions Architect / Technical Lead",
+    company: "System Integrator",
+    careAbout: [
+      "Building architectures that hold up in production at enterprise scale",
+      "Avoiding lock-in that creates long-term client liability",
+      "Technical differentiation in competitive RFP responses",
+      "Integrating cleanly with existing enterprise stacks",
+      "Justifying platform choices to skeptical engineering leadership"
+    ],
+    businessProblem: "The SA is designing the data architecture for an AI or modernization engagement and must justify the database choice against the default hyperscaler-managed options. The client's architecture diagram may already show a native cloud database. The SA needs clear technical proof points to change the default.",
+    valueProp: "Atlas is technically superior in the dimensions that matter most for AI and regulated workloads: 8,192-dimension vector search versus the 2,000-dimension cap on cloud-native alternatives, Queryable Encryption with no competitor equivalent, true multi-cloud portability that native cloud databases can't match, and automated schema migration tooling that dramatically reduces migration risk.",
+    oneLiner: "Atlas wins the technical evaluation for AI and regulated workloads — vector search dimensions, Queryable Encryption, and multi-cloud portability are capabilities that no cloud-native database alternative can match.",
+    relevantProducts: ["atlas","vector","encryption","relational","stream","search"],
+    objections: [
+      { q: "The cloud's native MongoDB-compatible database is good enough for our use case.", a: "It's compatible for basic workloads, but caps at 2,000 vector search dimensions versus Atlas's 8,192, has no Queryable Encryption, and can't run multi-cloud. Any architecture built on it for AI workloads will hit dimension ceilings and require re-platforming — a support and credibility problem the SA will own." },
+      { q: "The multi-cloud MongoDB API-compatible option on a competing cloud covers our Azure or GCP needs.", a: "MongoDB API compatibility on competing clouds typically tracks several major versions behind the Atlas release. Queryable Encryption, Stream Processing, and full Vector Search capabilities are not available. For clients needing portability across clouds, this creates the exact lock-in it claims to avoid." },
+      { q: "The client's data team is SQL-native — the document model is a risk.", a: "Relational Migrator automates schema conversion and generates application code in the team's existing language. The document model is not a learning risk — it's a performance advantage for the workloads that are the primary migration targets. Most engineering teams reach productivity within a few weeks." }
+    ],
+    plays: [
+      {
+        badge: "SELECT",
+        label: "AI Application Data Layer Architecture",
+        industry: "Any vertical with GenAI application investment",
+        situation: "The SA is designing the data layer for a new GenAI application — a RAG pipeline, semantic search system, or AI agent backend. The default design uses a relational database plus a standalone vector database, which adds operational complexity and latency.",
+        mongoAngle: "Atlas consolidates operational data and vector embeddings on a single platform. No separate vector database required. Native integrations with all major cloud AI services. The architecture simplifies to one database, one API, one security model — and the SA can write it into the RFP as a technical requirement that eliminates point solutions.",
+        expectedOutcome: "Atlas is written into the technical architecture as the unified operational and vector data store. Separate vector database line items are removed. The RFP is shaped around capabilities that only Atlas can fully satisfy.",
+        products: ["atlas","vector","stream","search"]
+      },
+      {
+        badge: "REPLACE",
+        label: "Regulated Data Architecture Modernization",
+        industry: "Financial Services / Healthcare / Government",
+        situation: "The client handles sensitive regulated data (PII, PHI, financial records) under HIPAA, FINRA, PCI-DSS, or FedRAMP requirements. The existing data architecture requires decryption for most queries, creating compliance exposure and performance limitations.",
+        mongoAngle: "Queryable Encryption is the only production-grade solution for querying encrypted fields without decryption. Atlas holds FedRAMP Moderate authorization. No competing database — native cloud or otherwise — offers this capability. Write it into the compliance architecture as a hard requirement and the competitive evaluation is effectively closed.",
+        expectedOutcome: "Queryable Encryption becomes a mandatory compliance architecture requirement. Competing databases are technically disqualified. Atlas is selected as the regulated data platform.",
+        products: ["encryption","atlas","vector"]
+      },
+      {
+        badge: "LAUNCH",
+        label: "Reference Architecture for Practice GTM",
+        industry: "Any vertical — SI internal initiative",
+        situation: "The SA is asked to develop a reusable reference architecture the practice can take to market. The goal is a documented pattern for AI data infrastructure that the practice can reference in every proposal, positioning the SI as the subject matter expert.",
+        mongoAngle: "Atlas + Vector Search + Stream Processing form a clean, defensible reference architecture for AI data infrastructure that no single cloud-native stack can replicate. The SA documents the pattern — operational data, real-time streaming, and vector search on one platform — and it becomes the practice's differentiating point of view in every competitive situation.",
+        expectedOutcome: "Published reference architecture adopted by the practice for AI data infrastructure proposals. SA becomes the internal subject matter expert and a resource for other client teams evaluating MongoDB.",
+        products: ["atlas","vector","stream","search","appservices"]
+      },
+      {
+        badge: "MIGRATE",
+        label: "Legacy Schema Conversion and Migration",
+        industry: "Any — legacy relational to cloud-native migration",
+        situation: "The SA is responsible for the technical migration path from a legacy relational database to a cloud-native target. The alternatives are a lift-and-shift (fast but leaves technical debt) or Oracle Autonomous DB (stays in-family but doesn't modernize the data model).",
+        mongoAngle: "Relational Migrator converts the legacy schema to MongoDB's document model automatically — stored procedures, joins, and relationships included. For document-heavy workloads, the converted schema performs better and costs less to operate than relational cloud equivalents. The SA controls the migration methodology and can document it as a repeatable delivery asset.",
+        expectedOutcome: "Relational Migrator is adopted as the technical migration tool. Atlas is selected as the target state for document-model workloads. The SA delivers a documented migration methodology the practice can replicate.",
+        products: ["relational","atlas","amp"]
+      }
+    ]
+  },
+
+  // ─── Cloud: Enterprise Account Manager ────────────────────────────────
+  {
+    id: "cloud-am",
+    category: "cloud",
+    title: "Enterprise / Global Account Manager",
+    company: "Cloud Provider (AWS / Azure / GCP)",
+    careAbout: [
+      "Growing committed spend consumption (EDP / MACC / CUD)",
+      "Accelerating migration velocity in strategic accounts",
+      "Winning net-new workloads that drive adjacent compute consumption",
+      "Displacing on-premises database contracts before renewal cycles",
+      "Meeting co-sell pipeline and revenue attribution targets"
+    ],
+    businessProblem: "The cloud AM needs to grow committed spend consumption and win net-new workloads inside strategic accounts. Legacy database contracts on-prem are blocking cloud migration, and the default lift-and-shift proposal is losing to more differentiated competitor approaches that include a credible data modernization story.",
+    valueProp: "Atlas on Marketplace burns cloud committed spend directly — every dollar counts against EDP, MACC, or CUD. MongoDB co-sells with the cloud field team and is an ally, not a competitor. Atlas also unlocks AI workloads that native cloud databases can't fully support at the vector dimension requirements production AI applications demand, driving adjacent GPU and compute consumption.",
+    oneLiner: "Atlas burns cloud committed spend, accelerates migration timelines, and unlocks AI workloads that native cloud databases can't fully serve — the cloud AM's co-sell partner, not a competitor.",
+    relevantProducts: ["atlas","relational","amp","vector"],
+    objections: [
+      { q: "We have native managed database services — why co-sell MongoDB?", a: "Atlas on Marketplace burns committed spend — it directly supports your number. Native cloud databases don't offer Vector Search at AI production dimensions or Queryable Encryption. For AI and regulated workloads, Atlas wins the technical evaluation. Your native databases handle relational workloads; Atlas wins document and AI workloads. They're additive." },
+      { q: "The customer wants to reduce vendor count — adding MongoDB increases complexity.", a: "Atlas runs on your Marketplace as a first-party-equivalent billing vehicle. The customer doesn't need a separate MongoDB billing relationship — it runs on their cloud account and burns committed spend. Vendor count for procurement purposes stays flat." },
+      { q: "Our migration programs already handle Oracle modernization.", a: "Your migration program handles application and infrastructure. MongoDB Relational Migrator handles the data layer conversion in parallel — they're additive, not competitive. Together they compress 18-month migrations to 6–9 months and land the customer on an AI-ready data layer instead of a cloud-hosted legacy database." }
+    ],
+    plays: [
+      {
+        badge: "SELECT",
+        label: "AI Workload Activation",
+        industry: "Technology / Financial Services / Healthcare",
+        situation: "The customer is building GenAI applications and the cloud AM is proposing a GPU compute and database architecture. The default database choice is a native cloud offering, but the AI team is hitting dimension limits or needs operational and vector data on one platform.",
+        mongoAngle: "Atlas Vector Search supports 8,192 dimensions versus the 2,000-cap on native cloud alternatives. Native integrations with cloud AI services. One platform for operational data and vector embeddings — no separate vector database. Higher GPU and compute utilization alongside Atlas drives additional committed spend.",
+        expectedOutcome: "Atlas replaces the native database for AI workloads. GPU and compute consumption increases as AI applications scale. Atlas Marketplace spend burns additional committed spend.",
+        products: ["atlas","vector","stream"]
+      },
+      {
+        badge: "REPLACE",
+        label: "Legacy Database Displacement",
+        industry: "Enterprise — any vertical with on-prem legacy databases",
+        situation: "The customer has a legacy on-premises database contract coming up for renewal and is evaluating cloud-native alternatives. The cloud AM's migration program covers infrastructure and application modernization but lacks a compelling database modernization component.",
+        mongoAngle: "Relational Migrator converts the legacy schema to Atlas automatically. The cloud migration program handles the app and infrastructure layer in parallel. Together they compress migration from 18 months to 6–9 months. The customer lands on an AI-ready Atlas data layer — not a cloud-hosted version of the same legacy system.",
+        expectedOutcome: "Customer selects Atlas plus the cloud migration program as the database modernization path. Cloud committed spend grows from Atlas Marketplace consumption. Legacy database contract is not renewed.",
+        products: ["relational","atlas","amp","vector"]
+      },
+      {
+        badge: "LAUNCH",
+        label: "Committed Spend Acceleration",
+        industry: "Enterprise — any vertical underpacing on cloud commitment",
+        situation: "A strategic account has a multi-year cloud committed spend agreement and is running below pace on consumption. The AM needs to accelerate drawdown without over-provisioning infrastructure or adding low-value workloads.",
+        mongoAngle: "Atlas on Marketplace converts MongoDB workload spend directly into committed spend drawdown. MongoDB's co-sell team engages alongside the cloud AM to position Atlas as the fastest path to EDP/MACC/CUD compliance. Consumption-based pricing means spend scales with usage — no over-provisioning risk.",
+        expectedOutcome: "Customer migrates or expands MongoDB workloads to Atlas on Marketplace. Cloud committed spend drawdown accelerates. AM hits pacing targets without over-provisioning.",
+        products: ["atlas","amp"]
+      },
+      {
+        badge: "MIGRATE",
+        label: "Cloud Migration Program + Atlas Data Layer",
+        industry: "Enterprise — any vertical with legacy on-prem database estate",
+        situation: "The customer is running a formal cloud migration program. Application and infrastructure migration is underway, but the database strategy defaults to lift-and-shift — leaving technical debt intact and blocking future AI workloads.",
+        mongoAngle: "Pair the existing cloud migration program with Atlas as the target database. Relational Migrator handles schema conversion in parallel with the application migration. The cloud's migration acceleration program (AMP/SMART/CAMP) and Relational Migrator working together create the fastest credible path to an AI-ready cloud data layer.",
+        expectedOutcome: "Atlas is added to the migration program scope. Migration timeline compresses. The customer's database estate lands on Atlas instead of a cloud-hosted legacy equivalent — enabling AI workloads the legacy system couldn't support.",
+        products: ["relational","atlas","amp"]
+      }
+    ]
+  },
+
+  // ─── Cloud: Partner Solutions Architect ──────────────────────────────
+  {
+    id: "cloud-psa",
+    category: "cloud",
+    title: "Partner Solutions Architect",
+    company: "Cloud Provider (AWS / Azure / GCP)",
+    careAbout: [
+      "Validating partner solutions for production readiness on cloud infrastructure",
+      "Ensuring clean integration with native cloud services — no support escalation risk",
+      "Building repeatable reference architectures the field can take to market",
+      "Optimizing cloud resource utilization alongside partner workloads",
+      "Reducing architecture complexity for joint customer engagements"
+    ],
+    businessProblem: "The PSA needs to validate that Atlas is technically sound within the cloud architecture, doesn't create unsupported integration gaps, and performs reliably at enterprise scale. Concerns center on native service overlap, long-term supportability, and whether published reference architectures exist.",
+    valueProp: "Atlas is a production-validated workload on every major cloud. Native integrations with all major cloud AI services are formally published and production-tested. Private Link, VPC Peering, and cloud-native IAM integrations are enterprise-proven. The PSA's role is to reference-architecture the pattern and scale it — not debug compatibility issues.",
+    oneLiner: "Atlas has native integration with every major cloud AI service, production-proven network and identity connectivity, and published reference architectures for RAG, streaming, and migration — it's a validated workload, not a liability.",
+    relevantProducts: ["atlas","vector","stream","encryption","relational"],
+    objections: [
+      { q: "Atlas adds a dependency outside our native service portfolio.", a: "Atlas runs inside the customer's VPC via Private Link or VPC Peering — network-adjacent to native services, not a separate internet dependency. MongoDB maintains formal integration documentation with all major cloud AI services. Native databases remain for relational workloads; Atlas handles document, AI, and regulated workloads." },
+      { q: "We don't have published joint reference architectures for MongoDB.", a: "MongoDB has co-developed reference architectures with every major cloud for RAG pipelines, real-time streaming, and Oracle migration. If not yet in your team's playbook, MongoDB's field SE team can co-develop the reference architecture for your specific ICP segments." },
+      { q: "Cross-vendor support escalations are operationally complex.", a: "Atlas is a fully managed service — MongoDB owns L1 through L3 support for the database layer. The cloud owns infrastructure. The separation is clean and documented. The PSA doesn't own Atlas escalations; MongoDB does." }
+    ],
+    plays: [
+      {
+        badge: "SELECT",
+        label: "RAG Pipeline Reference Architecture",
+        industry: "Technology / Financial Services / Healthcare",
+        situation: "A customer is building a production RAG pipeline for enterprise AI and the PSA is validating the architecture. The default pattern uses a separate vector database alongside a relational or document store — adding operational complexity and a point of failure.",
+        mongoAngle: "Atlas consolidates the operational store and vector store into a single managed service. The reference architecture simplifies to: application → Atlas → cloud AI service. Published integration documentation is available for all major cloud AI services. The PSA can adopt and publish this as the standard RAG pattern for the cloud's partner ecosystem.",
+        expectedOutcome: "PSA publishes or adopts Atlas as the reference RAG data layer. SI and customer teams follow the pattern for all net-new AI builds. Operational complexity decreases; AI deployment velocity increases.",
+        products: ["atlas","vector","stream"]
+      },
+      {
+        badge: "REPLACE",
+        label: "Regulated Workload Architecture Validation",
+        industry: "Financial Services / Healthcare / Government",
+        situation: "The customer is building on regulated data and the PSA is validating that the database architecture satisfies compliance requirements (HIPAA, FINRA, FedRAMP) without sacrificing query performance. Current architecture requires decryption for queries, creating compliance exposure.",
+        mongoAngle: "Queryable Encryption allows querying sensitive fields while data remains encrypted at the database level. Atlas holds FedRAMP Moderate authorization. No native cloud database offers Queryable Encryption. This is a hard technical differentiator the PSA can validate and document as a compliance pattern.",
+        expectedOutcome: "Queryable Encryption is validated as the compliance architecture pattern. The design is accepted by regulatory review. Atlas becomes the database of record for regulated data workloads at this customer.",
+        products: ["encryption","atlas"]
+      },
+      {
+        badge: "LAUNCH",
+        label: "Partner Ecosystem Reference Architecture Program",
+        industry: "Any — cloud PSA internal initiative",
+        situation: "The PSA is building out the cloud's partner ecosystem playbook for AI data infrastructure. Multiple SI partners are asking for reference architectures they can take to customers — and there is no standard pattern yet for the AI data layer.",
+        mongoAngle: "Atlas + Vector Search + Stream Processing form the reference AI data infrastructure pattern that works natively on the cloud and integrates with all major cloud AI services. The PSA publishes this as the recommended pattern — enabling SI partners to go to market faster and generating Marketplace transactions as the pattern scales.",
+        expectedOutcome: "Published reference architecture for AI data infrastructure adopted by multiple SI partners. Marketplace transaction volume grows as the pattern scales across the partner ecosystem.",
+        products: ["atlas","vector","stream","appservices"]
+      },
+      {
+        badge: "MIGRATE",
+        label: "Migration Program Technical Validation",
+        industry: "Enterprise — any vertical with legacy database estate",
+        situation: "The PSA is validating the technical migration path for a customer moving from an on-premises legacy database to cloud-native. The cloud migration program covers application and infrastructure; the database data layer migration methodology is unresolved.",
+        mongoAngle: "Relational Migrator is the validated data layer migration tool that pairs with the cloud program. It converts legacy relational schema and stored procedures to Atlas document model automatically. The PSA validates the combined architecture — cloud program for application and infrastructure, Relational Migrator for the data layer — and documents it as the standard migration methodology.",
+        expectedOutcome: "Relational Migrator is validated as the data migration component. Combined architecture is documented. Migration timeline compresses significantly. Pattern becomes reusable across the cloud's migration program.",
+        products: ["relational","atlas","amp"]
+      }
+    ]
+  },
+
+  // ─── Cloud: Alliance Manager ──────────────────────────────────────────
+  {
+    id: "cloud-alliance",
+    category: "cloud",
+    title: "Partner / Alliance Manager",
+    company: "Cloud Provider (AWS / Azure / GCP)",
+    careAbout: [
+      "Growing Marketplace transaction volume and committed spend attribution",
+      "Advancing MongoDB's partnership tier within the cloud program",
+      "Creating measurable co-sell pipeline with field-level attribution",
+      "Building joint GTM motions that SI partners can execute",
+      "Demonstrating partnership ROI to cloud leadership"
+    ],
+    businessProblem: "The alliance manager needs to show that the MongoDB partnership generates quantifiable Marketplace GMV, co-sell pipeline, and tier advancement. Cloud leadership expects revenue attribution and clear metrics that justify continued investment in the partnership — and those metrics require active field co-sell and Marketplace transaction velocity.",
+    valueProp: "Atlas on Marketplace creates direct committed spend attribution with every transaction. MongoDB's co-sell motion is field-level and measurable — MongoDB AEs engage alongside cloud AMs on specific opportunities. The alliance manager's core metrics (Marketplace GMV, co-sell pipeline, tier credits) all move when Atlas is in deals.",
+    oneLiner: "Atlas on Marketplace is a direct GMV event, co-sell pipeline is field-level and attributable, and tier credits accumulate on every joint win — the alliance manager's cleanest attribution story in the database ISV category.",
+    relevantProducts: ["atlas","amp","relational"],
+    objections: [
+      { q: "MongoDB's Marketplace transaction volume hasn't reached expectations yet.", a: "Migration co-sell is the fastest path to Marketplace volume growth — legacy database accounts migrating to Atlas on Marketplace represent significant per-transaction value. MongoDB's field co-sell team can prioritize joint pipeline with top-tier accounts this quarter to accelerate transaction velocity." },
+      { q: "Our partner tier framework rewards infrastructure workloads more than SaaS databases.", a: "Atlas is classified as a Marketplace ISV in all major cloud partner frameworks. Co-sell credits, Marketplace GMV, and partner-influenced ARR count toward tier advancement on the same basis as infrastructure ISVs. Verify with your cloud's ISV partnership team that Atlas transactions are being attributed correctly." },
+      { q: "We have other database ISV partners — MongoDB competes with them for mindshare.", a: "MongoDB addresses document, AI, and regulated data workloads. Relational and analytical database ISVs address separate workloads. They are additive, not competitive. The alliance manager can position MongoDB as the AI-ready operational database partner without creating internal conflicts with analytics or warehouse-focused ISVs." }
+    ],
+    plays: [
+      {
+        badge: "SELECT",
+        label: "AI Workload Co-sell Campaign",
+        industry: "Technology / Financial Services / Healthcare",
+        situation: "The alliance manager wants to generate measurable co-sell pipeline by activating MongoDB in accounts where AI workloads are being planned. The goal is to identify opportunities where Atlas wins the AI data layer decision and generates Marketplace transactions.",
+        mongoAngle: "Atlas Vector Search at 8,192 dimensions and native cloud AI service integrations make Atlas the technically superior choice for AI data infrastructure. The alliance manager defines a target account list, MongoDB's co-sell team engages alongside cloud AMs, and each win generates Marketplace GMV attributed to the program.",
+        expectedOutcome: "Measurable co-sell pipeline generated from AI workload accounts. Atlas Marketplace transactions attributed to the program. Alliance manager demonstrates quantifiable partnership ROI to cloud leadership.",
+        products: ["atlas","vector","amp"]
+      },
+      {
+        badge: "REPLACE",
+        label: "Oracle Displacement Co-sell Program",
+        industry: "Enterprise — any vertical with Oracle on-prem",
+        situation: "The cloud is running a formal legacy database displacement program and the alliance manager wants MongoDB positioned as the data layer partner. The program targets accounts with large on-premises Oracle estates and renewal cycles approaching.",
+        mongoAngle: "Relational Migrator is the MongoDB component of the Oracle displacement program. Every Oracle account that migrates to Atlas on Marketplace generates GMV, co-sell credits, and a competitive displacement win. MongoDB's field team can embed with the cloud's displacement team to accelerate individual deals.",
+        expectedOutcome: "MongoDB is a named partner in the Oracle displacement program. Relational Migrator is the recommended data migration tool. Pipeline from the program is attributed to the alliance manager with clear GMV and co-sell metrics.",
+        products: ["relational","atlas","amp"]
+      },
+      {
+        badge: "LAUNCH",
+        label: "Marketplace GMV Growth Initiative",
+        industry: "Enterprise — any vertical",
+        situation: "The alliance manager is under pressure to grow MongoDB Marketplace GMV in the current fiscal period. Existing pipeline hasn't transacted on Marketplace yet, and leadership is measuring the program by transaction volume, not just pipeline.",
+        mongoAngle: "MongoDB's co-sell team prioritizes the joint pipeline list and actively works deals toward Marketplace transaction. Monthly check-ins with the cloud's Marketplace team track attribution. Each large enterprise account that activates Atlas on Marketplace is a significant GMV event that moves the alliance manager's metrics.",
+        expectedOutcome: "Measurable Marketplace GMV growth in the target quarter. Atlas transaction volume attributed to the alliance manager's program. Tier advancement metrics move.",
+        products: ["atlas","amp"]
+      },
+      {
+        badge: "MIGRATE",
+        label: "Three-Way Migration GTM (Cloud + MongoDB + SI)",
+        industry: "Enterprise — any vertical",
+        situation: "The alliance manager wants to create a repeatable three-way GTM motion for migration engagements: cloud migration program + MongoDB + SI delivery partner. Each party has a defined role and a clear revenue attribution path.",
+        mongoAngle: "The migration triangulation is: cloud migration program for application and infrastructure + Relational Migrator for the data layer + SI for delivery. The cloud AM owns the customer relationship, MongoDB co-sells the database, the SI delivers. The alliance manager formalizes the GTM, ensures pipeline is tracked in both CRM systems, and drives Marketplace transactions as migration deals close.",
+        expectedOutcome: "Repeatable three-way migration GTM motion documented and launched with two to three SI partners. Joint pipeline tracked in CRM. First joint wins accelerate tier advancement and establish a replicable program for future quarters.",
+        products: ["atlas","relational","amp"]
+      }
+    ]
+  },
+
+  // ─── Customer: CTO / VP Engineering ──────────────────────────────────
+  {
+    id: "cust-cto",
+    category: "customer",
+    title: "CTO / VP Engineering",
+    company: "Enterprise Customer",
+    careAbout: [
+      "Shipping AI-powered products faster than the competition",
+      "Reducing infrastructure complexity and engineering maintenance burden",
+      "Avoiding architectural decisions that create long-term technical debt",
+      "Technical differentiation that visibly supports business outcomes",
+      "Enabling developer productivity without adding operational overhead"
+    ],
+    businessProblem: "The CTO is under pressure to deliver AI-powered products at speed. The current data architecture — typically fragmented across a relational database, a separate vector store, a search cluster, and a streaming layer — creates engineering bottlenecks. Developers spend time managing infrastructure integration instead of building product.",
+    valueProp: "Atlas consolidates the operational database, vector store, full-text search, and streaming layer into a single platform. One API, one SDK, one security model. AI applications that would take months to architect on a multi-database stack can reach prototype on Atlas in weeks. The document model aligns natively with the JSON-based data that AI applications produce and consume.",
+    oneLiner: "Atlas eliminates the multi-database architecture tax on AI development — one platform for operational data, vectors, search, and streaming means your engineers build product, not plumbing.",
+    relevantProducts: ["atlas","vector","stream","search","appservices","encryption"],
+    objections: [
+      { q: "We're already on a major cloud — the native database handles our workloads.", a: "Native cloud databases cap at 2,000 vector search dimensions. Any production RAG pipeline or semantic search application exceeds that at scale. Atlas supports 8,192 dimensions natively. The cloud's native database is fine for CRUD workloads; Atlas is designed for AI workloads." },
+      { q: "Our team is SQL-native — the document model is a learning curve and a risk.", a: "Atlas supports SQL via the MongoDB Query API and native connectors for most BI and analytics tools. Your SQL-native analysts can query Atlas without rewriting tooling. Engineers building AI applications will find the document model more natural for the JSON-native data that LLMs produce and consume." },
+      { q: "We'd rather stay on a single cloud-native database stack.", a: "A single cloud-native stack for AI and analytics typically means five separate services: a relational database, a document store, a search service, a streaming service, and a vector database. Five billing relationships, five security models, five sets of operational overhead. Atlas consolidates those into one — which is actually the simpler architecture." }
+    ],
+    plays: [
+      {
+        badge: "SELECT",
+        label: "AI Application Data Platform",
+        industry: "Technology / Financial Services / Healthcare",
+        situation: "The engineering team is building a net-new AI product — recommendation engine, semantic search, enterprise co-pilot, or knowledge base — and evaluating the data layer. The current architecture plan includes a relational database plus a separate vector store, adding complexity and latency.",
+        mongoAngle: "Atlas + Vector Search eliminates the separate vector database. Native integrations with all major cloud AI services plug into the team's existing model infrastructure. Stream Processing handles real-time event ingestion. The architecture reduces from three to four databases to one — and the engineering team ships faster.",
+        expectedOutcome: "Atlas is selected as the unified AI data layer. Development velocity increases. Operational complexity decreases. Time-to-production compresses significantly.",
+        products: ["atlas","vector","stream","search","appservices"]
+      },
+      {
+        badge: "REPLACE",
+        label: "Infrastructure Consolidation",
+        industry: "Any — fragmented multi-database estate",
+        situation: "Engineering maintains four to six separate database systems — a core relational system, a document store, a search cluster, a caching layer, and a streaming platform. Each requires a separate operations team, security model, and budget line. The infrastructure overhead is growing faster than the engineering team.",
+        mongoAngle: "Atlas Search replaces Elasticsearch. Atlas Stream Processing replaces Kinesis-equivalent tools for document-model event streams. Atlas Charts replaces BI tool licensing for operational dashboards. Relational Migrator migrates legacy relational workloads. The estate reduces from five systems to one or two — with one security model and one operations team.",
+        expectedOutcome: "Engineering headcount is freed from infrastructure management. Database licensing costs decrease. Atlas becomes the single operational data platform. The team builds product instead of managing integrations.",
+        products: ["atlas","search","stream","charts","relational"]
+      },
+      {
+        badge: "LAUNCH",
+        label: "Developer Platform Standardization",
+        industry: "Technology / SaaS / Enterprise",
+        situation: "The CTO wants to standardize the engineering organization on a single data platform to improve developer velocity, reduce onboarding time for new engineers, and simplify the operational model. Currently different teams use different databases based on project history rather than technical rationale.",
+        mongoAngle: "Atlas provides one API, one SDK, one security model, and one operational interface across all workloads. New engineers learn one database. Platform teams manage one infrastructure. The document model handles the majority of application data patterns, and Atlas Search, Stream Processing, and Vector Search cover specialized needs without requiring separate systems.",
+        expectedOutcome: "Engineering organization standardizes on Atlas as the primary data platform. Developer onboarding time decreases. Platform team overhead decreases. Database sprawl stops growing.",
+        products: ["atlas","vector","stream","search","appservices"]
+      },
+      {
+        badge: "MIGRATE",
+        label: "Legacy System Retirement",
+        industry: "Any — engineering organization with legacy technical debt",
+        situation: "The CTO has inherited a legacy system built on an aging relational database that the team has outgrown. The system blocks AI initiatives, causes operational incidents, and requires specialized knowledge to maintain. The board has approved a migration budget.",
+        mongoAngle: "Relational Migrator converts the legacy schema to Atlas document model automatically, generating application code scaffolding in the team's language of choice. The migration can be executed workload-by-workload to manage risk. Each migrated component reduces legacy system dependency and exposes the team to Atlas's AI-ready capabilities.",
+        expectedOutcome: "Legacy system is retired on a controlled timeline. Technical debt decreases. Engineering team gains an AI-ready platform. Operational incidents from the legacy system cease.",
+        products: ["relational","atlas","amp","vector"]
+      }
+    ]
+  },
+
+  // ─── Customer: CDO / CDAO ────────────────────────────────────────────
+  {
+    id: "cust-cdo",
+    category: "customer",
+    title: "CDO / CDAO",
+    company: "Enterprise Customer",
+    careAbout: [
+      "Building a unified data foundation for AI and analytics",
+      "Reducing ETL complexity and data pipeline maintenance burden",
+      "Enterprise data governance, lineage, and compliance",
+      "Accelerating time-to-insight for AI and analytical use cases",
+      "Demonstrating measurable data strategy ROI to the board"
+    ],
+    businessProblem: "The CDO is trying to build a single source of truth for AI and analytics, but operational data is fragmented across a large number of systems. Every new analytics or AI use case requires a custom ETL pipeline. AI initiatives stall waiting for clean, accessible, governed data — and the ETL backlog grows faster than it can be cleared.",
+    valueProp: "Atlas sits at the operational layer and feeds AI and analytics directly — without ETL. Stream Processing creates a real-time data fabric where operational events flow into AI pipelines and analytics dashboards without intermediate transformation. Queryable Encryption and unified access control satisfy governance requirements across operational, analytical, and AI data workloads from a single platform.",
+    oneLiner: "Atlas eliminates the ETL tax between operational data and AI — Stream Processing feeds AI pipelines in real time, Queryable Encryption satisfies governance requirements, and one access control model covers every data workload the CDO is responsible for.",
+    relevantProducts: ["atlas","stream","vector","encryption","charts"],
+    objections: [
+      { q: "We have a data warehouse strategy — where does MongoDB fit?", a: "Atlas is the operational layer; your warehouse is the analytical layer. Stream Processing feeds the warehouse in real time without custom ETL pipelines. The CDO gets fresher data in the warehouse faster and eliminates the ETL pipeline backlog — Atlas and the warehouse are complementary, not competing." },
+      { q: "Data governance requires enforced schemas — MongoDB is schemaless.", a: "Atlas supports schema validation at the collection level. Queryable Encryption enforces field-level encryption with access policies that satisfy the toughest governance requirements. FedRAMP Moderate authorization covers federal and regulated industry requirements. Atlas is not schemaless by default — it's schema-flexible by design." },
+      { q: "We're not ready to change our core data infrastructure.", a: "Atlas doesn't require replacing existing infrastructure on day one. Start with net-new AI applications — the CDO gets a clean AI data layer without touching existing systems. Stream Processing bridges existing operational systems to the AI data layer. Migration follows the CDO's roadmap at a controlled pace." }
+    ],
+    plays: [
+      {
+        badge: "SELECT",
+        label: "Enterprise AI Data Foundation",
+        industry: "Financial Services / Healthcare / HR Tech / Manufacturing",
+        situation: "The CDO is building the data infrastructure for enterprise AI initiatives. Current operational data is fragmented across many systems, and AI teams are building ad hoc pipelines for every use case. A unified AI data layer with governance is required before AI programs can scale.",
+        mongoAngle: "Atlas becomes the enterprise AI data layer. Stream Processing feeds AI pipelines in real time from operational systems. Vector Search stores and retrieves embeddings for RAG applications. Charts provides real-time operational visibility. One platform, one governance model, one data contract for all AI workloads.",
+        expectedOutcome: "Atlas is adopted as the enterprise AI data layer. AI program development velocity increases. ETL pipeline backlog decreases. Data governance is unified across AI and operational workloads.",
+        products: ["atlas","stream","vector","charts"]
+      },
+      {
+        badge: "REPLACE",
+        label: "Governed Data Platform Modernization",
+        industry: "Financial Services / Healthcare / Government",
+        situation: "The CDO is replacing a legacy data store handling sensitive regulated data (PII, PHI, financial records). The migration must satisfy regulatory requirements without downtime or data exposure — and the replacement must improve the governance posture, not just match the legacy system.",
+        mongoAngle: "Queryable Encryption allows the CDO to query sensitive fields while data remains encrypted at the database level — satisfying HIPAA, FINRA, or PCI-DSS requirements without architectural compromise. FedRAMP Moderate covers federal requirements. Relational Migrator handles the schema conversion from the legacy system. Governance improves, not just data residency.",
+        expectedOutcome: "Regulatory sign-off on Atlas as the target state for sensitive data workloads. Legacy system decommission begins. CDO demonstrates a measurable improvement in governance posture over the legacy platform.",
+        products: ["encryption","atlas","relational","stream"]
+      },
+      {
+        badge: "LAUNCH",
+        label: "Real-Time Operational Analytics",
+        industry: "Retail / Financial Services / Manufacturing",
+        situation: "The CDO wants to move from batch reporting — daily or weekly dashboards — to real-time operational analytics. Current BI architecture requires nightly ETL jobs that delay insight by 24 hours or more. Business stakeholders are making decisions on stale data.",
+        mongoAngle: "Atlas Charts provides real-time dashboards directly on live operational data — zero ETL, zero latency. Stream Processing ingests operational events in real time. The CDO gets live operational analytics without a separate data pipeline or additional BI tool licensing.",
+        expectedOutcome: "Real-time operational dashboards replace batch reporting. ETL pipeline jobs are reduced. BI tool licensing costs decrease. CDO demonstrates measurable improvement in time-to-insight for business stakeholders.",
+        products: ["atlas","charts","stream","vector"]
+      },
+      {
+        badge: "MIGRATE",
+        label: "Data Estate Consolidation",
+        industry: "Enterprise — any vertical with fragmented data infrastructure",
+        situation: "The CDO has inherited a fragmented data estate across dozens of systems. The board has mandated a data rationalization initiative with a target of reducing the number of data platforms and the associated governance overhead within 18 months.",
+        mongoAngle: "Atlas is the consolidation target for operational and AI data workloads. Stream Processing replaces custom ETL pipelines. Search replaces standalone search infrastructure. Charts reduces BI tool dependency for operational reporting. Relational Migrator migrates legacy relational workloads systematically. The estate consolidates onto one governed platform.",
+        expectedOutcome: "Data platform count reduces materially. ETL pipeline maintenance burden decreases. Governance overhead centralizes on one platform. CDO delivers on the board's rationalization mandate within the target timeline.",
+        products: ["atlas","stream","search","charts","relational"]
+      }
+    ]
+  },
+
+  // ─── Customer: CIO / VP Infrastructure ───────────────────────────────
+  {
+    id: "cust-cio",
+    category: "customer",
+    title: "CIO / VP Infrastructure",
+    company: "Enterprise Customer",
+    careAbout: [
+      "Reducing total infrastructure cost and licensing spend",
+      "Meeting cloud committed spend targets without over-provisioning",
+      "Eliminating end-of-life on-premises database systems",
+      "Maintaining enterprise SLAs and security posture across the database estate",
+      "Simplifying the operational model for a lean infrastructure team"
+    ],
+    businessProblem: "The CIO manages a database estate with multiple legacy systems — each with separate licensing costs, separate operations teams, and separate security models. Legacy vendor renewal cycles are approaching, cloud committed spend is underpacing, and the infrastructure team is stretched across too many platforms to operate any of them optimally.",
+    valueProp: "Atlas consolidates the database estate onto one managed platform. Oracle and SQL Server license costs are eliminated as workloads migrate. Atlas on Marketplace burns cloud committed spend directly. One managed service means one operations team, one security model, and one SLA — 99.995% uptime, SOC 2 Type II, ISO 27001, and FedRAMP Moderate.",
+    oneLiner: "Atlas consolidates a fragmented database estate to one managed platform, burns cloud committed spend, eliminates legacy licensing, and carries enterprise SLA and compliance certifications — the CIO's infrastructure rationalization and budget story.",
+    relevantProducts: ["atlas","relational","encryption","amp"],
+    objections: [
+      { q: "Legacy systems are embedded in too many business processes to replace quickly.", a: "Atlas doesn't require full replacement in a single project. Relational Migrator enables workload-by-workload migration — start with the least embedded workloads, prove the pattern, then expand. Each migrated workload reduces legacy licensing spend immediately. The full migration follows a 3–5 year roadmap the CIO controls." },
+      { q: "We need to meet a cloud committed spend target — how does Atlas help specifically?", a: "Atlas on AWS, Azure, or GCP Marketplace counts directly against EDP, MACC, and CUD committed spend agreements. Every dollar spent on Atlas is a dollar of cloud commitment fulfilled. MongoDB's co-sell team works with your cloud account manager to ensure Atlas spend is attributed correctly." },
+      { q: "Managed services reduce our control over critical infrastructure.", a: "Atlas provides full operational control — custom cluster configurations, private networking via VPC and Private Link, BYOK encryption, audit logging, and LDAP/SAML integration. You control configuration; MongoDB manages patching, backups, failover, and capacity planning. Most CIOs find this gives them more control over what actually matters." }
+    ],
+    plays: [
+      {
+        badge: "SELECT",
+        label: "Cloud-Native Database Standardization",
+        industry: "Enterprise — any vertical planning cloud-first infrastructure",
+        situation: "The CIO is establishing a cloud-first infrastructure strategy and needs to define the enterprise standard for operational databases. The decision will govern all new application development and set the direction for eventual legacy migration.",
+        mongoAngle: "Atlas provides a single enterprise database standard that works across AWS, Azure, and GCP — no cloud lock-in, one operating model, one security framework. Consumption-based pricing aligns database spend with actual usage rather than over-provisioned fixed capacity. Selecting Atlas as the enterprise standard now shapes the migration roadmap and avoids re-platforming costs later.",
+        expectedOutcome: "Atlas is selected as the enterprise operational database standard. New application development defaults to Atlas. Cloud committed spend consumption begins growing from Atlas Marketplace transactions.",
+        products: ["atlas","vector","encryption"]
+      },
+      {
+        badge: "REPLACE",
+        label: "Legacy License Elimination",
+        industry: "Any — Oracle or SQL Server renewal cycle approaching",
+        situation: "The CIO has a major legacy database license renewal approaching within 12 to 18 months. The renewal represents a significant cost with no meaningful improvement in capability. The CIO has board support to evaluate alternatives but needs a credible, low-risk migration path.",
+        mongoAngle: "Relational Migrator converts legacy schema to Atlas workload by workload. Start with the lowest-risk workloads, prove the migration pattern, then scale. Each migrated workload immediately reduces legacy licensing spend. Atlas on Marketplace burns cloud committed spend as the legacy system is retired. The CIO gets a credible Oracle or SQL Server exit roadmap without a high-risk big-bang migration.",
+        expectedOutcome: "Legacy licensing spend reduces materially in Year 1. Atlas Marketplace spend accelerates cloud commitment pacing. CIO delivers a credible license exit roadmap to the board.",
+        products: ["relational","atlas","amp","encryption"]
+      },
+      {
+        badge: "LAUNCH",
+        label: "Cloud Committed Spend Acceleration",
+        industry: "Enterprise — any vertical underpacing on cloud commitment",
+        situation: "The CIO is running below pace on a multi-year cloud committed spend agreement and faces penalties if consumption doesn't accelerate in the current fiscal period. New workloads need to be cloud-native and consumption-based rather than fixed-capacity.",
+        mongoAngle: "Atlas is consumption-based — scale up and down without pre-committing to instance sizes. Every Atlas dollar burns against the cloud committed spend agreement. New AI applications, streaming workloads, and migrated legacy workloads all run on Atlas and count against the commitment. No over-provisioning risk.",
+        expectedOutcome: "Cloud committed spend consumption accelerates. Over-provisioning risk decreases with Atlas consumption-based pricing. CIO demonstrates cloud commitment compliance ahead of the penalty window.",
+        products: ["atlas","amp","relational"]
+      },
+      {
+        badge: "MIGRATE",
+        label: "Database Estate Rationalization Program",
+        industry: "Enterprise — any vertical with fragmented database infrastructure",
+        situation: "The CIO manages five or more separate database systems — each with its own operations team, license cost, and security model. The board has mandated a vendor rationalization initiative. The CIO needs a migration program that is executable within the existing infrastructure team's capacity.",
+        mongoAngle: "Atlas is the consolidation target. Relational Migrator enables systematic workload-by-workload migration with automated schema conversion — reducing the execution risk that makes large database migrations fail. Each system retired reduces license spend, operations overhead, and security surface area. The estate consolidates to one platform with one operations model.",
+        expectedOutcome: "Database vendor count reduces materially. License and operations costs decrease. Security posture improves. CIO delivers on the board's rationalization mandate and frees infrastructure team capacity for higher-value work.",
+        products: ["atlas","relational","amp","encryption"]
+      }
+    ]
+  }
+
+];
+
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+let currentPersonaId = null;
+let activePlayIdx = 0;
+
+// ═══════════════════════════════════════════════════════════
+// UTILITIES
+// ═══════════════════════════════════════════════════════════
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+function productName(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  return p ? p.name : id;
+}
+function badge(type) {
+  return `<span class="badge badge-${esc(type)}">${esc(type)}</span>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════
+function navigate(id) {
+  currentPersonaId = id;
+  activePlayIdx = 0;
+
+  document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+  const nb = document.getElementById('nav-' + id);
+  if (nb) nb.classList.add('active');
+
+  if (id === 'products') {
+    document.getElementById('view-products').classList.remove('hidden');
+    document.getElementById('view-persona').classList.add('hidden');
+    document.getElementById('product-grid').classList.remove('hidden');
+    document.getElementById('product-detail').classList.add('hidden');
+    renderProductGrid();
+  } else {
+    document.getElementById('view-products').classList.add('hidden');
+    document.getElementById('view-persona').classList.remove('hidden');
+    renderPersona(id, 0);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// PRODUCTS VIEW
+// ═══════════════════════════════════════════════════════════
+function renderProductGrid() {
+  document.getElementById('product-grid').innerHTML = PRODUCTS.map(p => `
+    <div class="product-mini" onclick="openProduct('${esc(p.id)}')">
+      <div class="product-mini-name">${esc(p.name)}</div>
+      <div class="product-mini-tag">${esc(p.tagline)}</div>
+    </div>
+  `).join('');
+}
+
+function openProduct(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('product-grid').classList.add('hidden');
+  document.getElementById('product-detail').classList.remove('hidden');
+  document.getElementById('product-detail-inner').innerHTML = `
+    <div class="detail-panel">
+      <div class="card-title" style="font-size:1.2rem;margin-bottom:4px;">${esc(p.name)}</div>
+      <div class="card-tagline">${esc(p.tagline)}</div>
+      <hr class="divider"/>
+      <div class="label">What It Is</div>
+      <div class="value-text">${esc(p.what)}</div>
+      <div class="label">So What — Why It Matters</div>
+      <div class="value-text">${esc(p.soWhat)}</div>
+      <div class="label">Key Facts &amp; Talk Points</div>
+      <ul class="fact-list">${p.keyFacts.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+    </div>
+  `;
+}
+
+function closeProductDetail() {
+  document.getElementById('product-grid').classList.remove('hidden');
+  document.getElementById('product-detail').classList.add('hidden');
+  renderProductGrid();
+}
+
+// ═══════════════════════════════════════════════════════════
+// PERSONA VIEW
+// ═══════════════════════════════════════════════════════════
+function renderPersona(id, playIdx) {
+  const p = PERSONAS.find(x => x.id === id);
+  if (!p) return;
+  activePlayIdx = playIdx;
+
+  const catLabel = { si: 'SI Partner', cloud: 'Cloud Partner', customer: 'Customer' }[p.category] || '';
+  const play = p.plays[playIdx];
+
+  // Build toggle buttons
+  const toggles = p.plays.map((pl, i) => {
+    let activeClass = '';
+    if (i === playIdx) {
+      const m = { SELECT:'active', REPLACE:'active-replace', LAUNCH:'active-launch', MIGRATE:'active-migrate' };
+      activeClass = m[pl.badge] || 'active';
+    }
+    return `<button class="play-toggle-btn ${activeClass}" onclick="switchPlay('${esc(id)}',${i})">
+      ${badge(pl.badge)} ${esc(pl.label)}
+    </button>`;
+  }).join('');
+
+  // Build active play card
+  const playHTML = play ? `
+    <div class="play-card">
+      <div class="play-header">
+        ${badge(play.badge)}
+        <span class="play-title">${esc(play.label)}</span>
+      </div>
+      <div class="play-industry">Industry / Context: ${esc(play.industry)}</div>
+      <div class="play-section">
+        <div class="play-section-label">Situation</div>
+        <div class="play-section-text">${esc(play.situation)}</div>
+      </div>
+      <div class="play-section">
+        <div class="play-section-label">MongoDB Angle</div>
+        <div class="play-section-text">${esc(play.mongoAngle)}</div>
+      </div>
+      <div class="play-section">
+        <div class="play-section-label">Expected Outcome</div>
+        <div class="play-section-text">${esc(play.expectedOutcome)}</div>
+      </div>
+      <div class="play-section" style="margin-bottom:0;">
+        <div class="play-section-label" style="margin-bottom:6px;">Products in Play</div>
+        <div class="chip-row">${play.products.map(pid=>`<span class="chip">${esc(productName(pid))}</span>`).join('')}</div>
+      </div>
+    </div>
+  ` : '';
+
+  document.getElementById('persona-inner').innerHTML = `
+    <div class="category-tag">${esc(catLabel)}</div>
+    <div class="section-heading">${esc(p.title)}</div>
+    <div class="section-sub">${esc(p.company)}</div>
+
+    <div class="one-liner">"${esc(p.oneLiner)}"</div>
+
+    <div class="two-col" style="margin-bottom:14px;">
+      <div class="card">
+        <div class="label" style="margin-bottom:8px;">What They Care About</div>
+        ${p.careAbout.map(c=>`<span class="pill">${esc(c)}</span>`).join('')}
+      </div>
+      <div class="card">
+        <div class="label">Business Problem</div>
+        <div class="value-text" style="margin-bottom:0;">${esc(p.businessProblem)}</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px;">
+      <div class="label">MongoDB Value Proposition</div>
+      <div class="value-text" style="margin-bottom:0;">${esc(p.valueProp)}</div>
+    </div>
+
+    <div style="margin-bottom:18px;">
+      <div class="label" style="margin-bottom:8px;">Relevant Products</div>
+      <div class="chip-row">
+        ${p.relevantProducts.map(pid=>`<span class="chip" style="cursor:pointer;" onclick="navigate('products');setTimeout(()=>openProduct('${esc(pid)}'),60);">${esc(productName(pid))}</span>`).join('')}
+      </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <div class="label" style="margin-bottom:10px;">Example Plays — Toggle to see how the message changes by motion type</div>
+      <div class="play-toggles">${toggles}</div>
+      ${playHTML}
+    </div>
+
+    <div class="card">
+      <div class="label" style="margin-bottom:14px;">Common Objections &amp; Responses</div>
+      ${p.objections.map(o=>`
+        <div class="objection">
+          <div class="objection-q">Q: ${esc(o.q)}</div>
+          <div class="objection-a">${esc(o.a)}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function switchPlay(personaId, idx) {
+  activePlayIdx = idx;
+  renderPersona(personaId, idx);
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => navigate('products'));
+</script>
+</body>
 </html>
